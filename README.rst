@@ -24,7 +24,7 @@ Usage
 
 1. Update ``pelicanconf.py``:
 
-   1. Add ``pelican-`` to ``PLUGINS``.
+   1. Add ``metadataparsing`` to ``PLUGINS``.
       
       You should add it before any metadata-affecting plugins.
 
@@ -52,6 +52,9 @@ Example
 
 Gallery Metadata
 ----------------
+
+``pelicanconf.py``:
+
 .. code-block:: python
 
     import collections
@@ -87,6 +90,22 @@ Gallery Metadata
     METADATA_PARSERS = {
         "Gallery": parse_gallery
     }
+
+Theme:
+
+.. code-block:: html
+
+    {% if article.gallery %}
+    <div class="article-gallery">
+        <h3>Gallery:</h3>
+        <ul>
+            {% for image in article.gallery %}
+            <li>{{ colorbox(image.url, image.description) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
 
 Multi-line metadata to simple string
 ------------------------------------
